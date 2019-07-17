@@ -1,0 +1,55 @@
+﻿@page
+@model MagicTrade.Pages.Cards.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Card</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Card.ID" />
+            <div class="form-group">
+                <label asp-for="Card.Name" class="control-label"></label>
+                <input asp-for="Card.Name" class="form-control" />
+                <span asp-validation-for="Card.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Card.Set" class="control-label"></label>
+                <input asp-for="Card.Set" class="form-control" />
+                <span asp-validation-for="Card.Set" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Card.Type" class="control-label"></label>
+                <input asp-for="Card.Type" class="form-control" />
+                <span asp-validation-for="Card.Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Card.Condition" class="control-label"></label>
+                <input asp-for="Card.Condition" class="form-control" />
+                <span asp-validation-for="Card.Condition" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Card.Price" class="control-label"></label>
+                <input asp-for="Card.Price" class="form-control" />
+                <span asp-validation-for="Card.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
