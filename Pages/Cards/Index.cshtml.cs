@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using MagicTrade.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace MagicTrade.Pages.Cards
 {
@@ -19,10 +20,32 @@ namespace MagicTrade.Pages.Cards
         }
 
         public IList<Card> Card { get;set; }
+        [BindProperty(SupportsGet = true)]
+        public string SearchString { get; set; }
+        public SelectList Name { get; set; }
+        [BindProperty(SupportsGet =true)]
+        public string CardSet { get; set; }
 
         public async Task OnGetAsync()
         {
-            Card = await _context.Card.ToListAsync();
+            IQueryable<string> setQuery = from m in _context.Card
+                                            orderby m.Set
+                                            select m.Set;
+
+            var cards = from m in _context.Card
+                         select m;
+
+            if (!string.IsNullOrEmpty(SearchString))
+            {
+                cards = cards.Where(s => s.Name.Contains(SearchString));
+            }
+
+            if (!string.IsNullOrEmpty(CardSet))
+            {
+                cards = cards.Where(x => x.Set == CardSet);
+            }
+            Name = new SelectList(await setQuery.Distinct().ToListAsync());
+            Card = await cards.ToListAsync();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MagicTrade.Models
 {
@@ -10,6 +11,8 @@ namespace MagicTrade.Models
         public string Set { get; set; }
         public string Type { get; set; }
         public string Condition { get; set; }
+        [Column(TypeName = "decimal(18, 2)") ]
         public decimal Price { get; set; }
+        public string Owner { get; set; }
     }
 }
