@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  magictrade:
+    image: ${DOCKER_REGISTRY-}magictrade
+    build:
+      context: .
+      dockerfile: Dockerfile
